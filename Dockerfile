@@ -1,9 +1,7 @@
 # Source: https://github.com/rebuy-de/golang-template
 # Version: 1.3.1
 
-FROM golang:1.11-alpine
-
-RUN apk add --no-cache git make
+FROM golang:1.11.2
 
 # Configure Go
 ENV GOPATH /go
