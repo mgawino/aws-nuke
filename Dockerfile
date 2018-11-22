@@ -21,8 +21,6 @@ WORKDIR /go/src/github.com/Masterminds/glide
 RUN git checkout v0.12.3
 RUN go install
 
-COPY . /go/src/github.com/rebuy-de/aws-nuke
 WORKDIR /go/src/github.com/rebuy-de/aws-nuke
-RUN CGO_ENABLED=0 make install
 
-ENTRYPOINT ["/go/bin/aws-nuke"]
+CMD make build && chown $UID:$GID aws-nuke && chown -h $UID:$GID aws-nuke
