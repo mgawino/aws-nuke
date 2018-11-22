@@ -9,6 +9,7 @@ import (
 type APIGatewayRestAPI struct {
 	svc       *apigateway.APIGateway
 	restAPIID *string
+	name *string
 }
 
 func init() {
@@ -33,6 +34,7 @@ func ListAPIGatewayRestApis(sess *session.Session) ([]Resource, error) {
 			resources = append(resources, &APIGatewayRestAPI{
 				svc:       svc,
 				restAPIID: item.Id,
+				name: item.Name,
 			})
 		}
 
@@ -56,5 +58,5 @@ func (f *APIGatewayRestAPI) Remove() error {
 }
 
 func (f *APIGatewayRestAPI) String() string {
-	return *f.restAPIID
+	return *f.name
 }
