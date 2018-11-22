@@ -206,6 +206,7 @@ func (n *Nuke) Filter(item *Item) error {
 
 		if match {
 			item.State = ItemStateFiltered
+			item.NoListFiltered = n.Parameters.NoListFiltered
 			item.Reason = "filtered by config"
 			return nil
 		}

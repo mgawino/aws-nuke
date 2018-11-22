@@ -110,6 +110,9 @@ func NewRootCommand() *cobra.Command {
 		&params.MaxWaitRetries, "max-wait-retries", 0,
 		"If specified, the program will exit if resources are stuck in waiting for this many iterations. "+
 			"0 (default) disables early exit.")
+	command.PersistentFlags().BoolVar(
+		&params.NoListFiltered, "no-list-filtered", false,
+		"If specified, filtered resources are not showed.")
 
 	command.AddCommand(NewVersionCommand())
 	command.AddCommand(NewResourceTypesCommand())

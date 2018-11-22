@@ -13,6 +13,7 @@ type NukeParameters struct {
 
 	NoDryRun bool
 	Force    bool
+	NoListFiltered bool
 
 	MaxWaitRetries int
 }

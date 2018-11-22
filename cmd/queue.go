@@ -28,6 +28,8 @@ type Item struct {
 
 	Region Region
 	Type   string
+
+	NoListFiltered bool
 }
 
 func (i *Item) Print() {
@@ -41,7 +43,9 @@ func (i *Item) Print() {
 	case ItemStateFailed:
 		Log(i.Region, i.Type, i.Resource, ReasonError, i.Reason)
 	case ItemStateFiltered:
-		Log(i.Region, i.Type, i.Resource, ReasonSkip, i.Reason)
+	    if !i.NoListFiltered {
+		    Log(i.Region, i.Type, i.Resource, ReasonSkip, i.Reason)
+		}
 	case ItemStateFinished:
 		Log(i.Region, i.Type, i.Resource, ReasonSuccess, "removed")
 	}
