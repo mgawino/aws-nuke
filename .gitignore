@@ -4,3 +4,4 @@
 /releases
 .glide
 aws-nuke*
+.idea*

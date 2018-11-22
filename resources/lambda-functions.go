@@ -16,19 +16,27 @@ func init() {
 
 func ListLambdaFunctions(sess *session.Session) ([]Resource, error) {
 	svc := lambda.New(sess)
-
 	params := &lambda.ListFunctionsInput{}
-	resp, err := svc.ListFunctions(params)
-	if err != nil {
-		return nil, err
-	}
-
 	resources := make([]Resource, 0)
-	for _, function := range resp.Functions {
-		resources = append(resources, &LambdaFunction{
-			svc:          svc,
-			functionName: function.FunctionName,
-		})
+
+	for {
+	    resp, err := svc.ListFunctions(params)
+		if err != nil {
+			return nil, err
+		}
+
+		for _, function := range resp.Functions {
+            resources = append(resources, &LambdaFunction{
+                svc:          svc,
+                functionName: function.FunctionName,
+            })
+	    }
+
+		if resp.NextMarker == nil {
+			break
+		}
+
+		params.Marker = resp.NextMarker
 	}
 
 	return resources, nil
